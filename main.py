@@ -1,10 +1,11 @@
 import cv2
 
 color_red = (0, 0, 225)	#枠の色
+windowName = "face test"
 
 if __name__ == '__main__':
 	# window
-	cv2.namedWindow("face test")
+	cv2.namedWindow(windowName)
 	# webcamera
 	cap = cv2.VideoCapture(0)
 	# 分類器の指定
@@ -16,17 +17,17 @@ if __name__ == '__main__':
 		ret,frame = cap.read()
 		# frameの大きさを取得
 		height, width, channels = frame.shape
-        # 画像の取得と顔の検出
+		# 画像の取得と顔の検出
 		face_list = cascade.detectMultiScale(frame, minSize=(100, 100))
 
-        # 検出した顔に印を付ける
+		# 検出した顔に印を付ける
 		for (x, y, w, h) in face_list:
 			pen_w = 3
 			cv2.rectangle(frame, (x, y), (x+w, y+h), color_red, thickness = pen_w)
 
-        # フレーム表示
+		# フレーム表示
 		if ret :
-			cv2.imshow("ORIGINAL", frame)
+			cv2.imshow(windowName, frame)
 		if cv2.waitKey(33) == 27:
 			break
 		
